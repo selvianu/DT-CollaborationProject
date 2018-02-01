@@ -15,6 +15,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>5.0.2.RELEASE</version>
@@ -29,7 +34,12 @@
 			<artifactId>spring-beans</artifactId>
 			<version>5.0.2.RELEASE</version>
 		</dependency>
+		<dependency>
 
+			<groupId>dt.test</groupId>
+			<artifactId>LibraryBackEnd</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>UserRegistration</finalName>

@@ -10,35 +10,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-body {
-	margin: 0;
-}
-
-.topnav {
-	overflow: hidden;
-	background-color: black;
-}
-
-.topnav a {
-	float: left;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-}
-
-.topnav a:hover {
-	background-color: #ddd;
-	color: black;
-}
-
-.topnav a.active {
-	background-color: #4CAF50;
-	color: white;
-}
-</style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -51,14 +22,54 @@ body {
 			</button>
 			<a class="navbar-brand" href="#">Kidoo's Book Shelf</a>
 		</div>
+
 		<div class="collapse navbar-collapse, topnav" id="myNav">
 			<ul class="nav navbar-nav">
 				<li><a href="home">Home</a></li>
-				<li><a href="register">Register</a></li>
-				<li><a href="signin">Sign In</a></li>
+				<li><a href="#" data-target="#id01" data-toggle="modal">Register</a>
+				</li>
+				<li><a href="#" data-target="#id02" data-toggle="modal">Sign
+						In</a></li>
+				<li><a href="#" data-target="#id03" data-toggle="modal">Add
+						Category</a>
+				<li><a href="#" data-target="#id04" data-toggle="modal">Add
+						Product</a>
 			</ul>
 		</div>
 	</div>
 	</nav>
+	<div id="id01" class="modal" role="dialogue">
+		<span onclick="document.getElementById('id01').style.display='none'"
+			class="close" title="Close Modal">&times;</span>
+		<div class="container">
+			<h1>Sign Up</h1>
+			<%@ include file="register.jsp"%>
+			<hr>
+		</div>
+	</div>
+	<div id="id02" class="modal" role="dialogue">
+		<span onclick="document.getElementById('id02').style.display='none'"
+			class="close" title="Close Modal">&times;</span>
+		<div class="container">
+			<%@ include file="signin.jsp"%>
+			<hr>
+		</div>
+	</div>
+	<div id="id03" class="modal" role="dialogue">
+		<span onclick="document.getElementById('id03').style.display='none'"
+			class="close" title="Close Modal">&times;</span>
+		<div class="container">
+			<%@ include file="addcategory.jsp"%>
+			<hr>
+		</div>
+	</div>
+	<div id="id04" class="modal" role="dialogue">
+		<span onclick="document.getElementById('id04').style.display='none'"
+			class="close" title="Close Modal">&times;</span>
+		<div class="container">
+			<%@ include file="addproduct.jsp"%>
+			<hr>
+		</div>
+	</div>
 </body>
 </html>

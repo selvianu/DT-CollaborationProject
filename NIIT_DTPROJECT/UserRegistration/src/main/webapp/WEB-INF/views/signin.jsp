@@ -7,12 +7,10 @@
 <title>Welcome - Sign In - to access</title>
 </head>
 <body bgcolor=" #ffb3ff">
-
-
-	<form action="signInCtrl" method="post">
-		Enter User Name:<input type="text" name="username" required>
-		Enter Password:<input type="password" name="password" required>
-		<input type="submit" value="Log In">
+	<form action="signInCtrl" method="post" class="modal-content">
+		Enter User Name:<input type="text" name="username" required></br>
+		</br> Enter Password:<input type="password" name="password" required></br>
+		</br> <input type="submit" value="Log In">
 	</form>
 </body>
 </html>

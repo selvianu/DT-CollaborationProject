@@ -35,6 +35,7 @@ public class DBConfig {
 	public SessionFactory getSessionFactory() {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		hibernateProperties.setProperty("show_sql", "true");
 		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 
 		LocalSessionFactoryBuilder localSessionFacBuilder = new LocalSessionFactoryBuilder(getH2DataSource());

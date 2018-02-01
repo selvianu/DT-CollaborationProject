@@ -1,5 +1,4 @@
 package com.dt.dao;
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -13,6 +12,7 @@ import com.dt.model.Category;
 @Transactional
 @Repository("categoryDao")
 public class CategoryDaoImpl implements CategoryDao {
+	
 	@Autowired
 	SessionFactory sessionFactory;
 
