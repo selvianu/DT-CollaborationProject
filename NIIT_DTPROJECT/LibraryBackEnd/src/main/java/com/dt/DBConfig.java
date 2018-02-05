@@ -12,6 +12,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import com.dt.model.Category;
 
@@ -51,6 +53,12 @@ public class DBConfig {
 	public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager hibernateTranMgr = new HibernateTransactionManager(sessionFactory);
 		return hibernateTranMgr;
+	}
+
+	// Multipart
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 
 }

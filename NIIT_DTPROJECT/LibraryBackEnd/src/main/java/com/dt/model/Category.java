@@ -1,9 +1,14 @@
 package com.dt.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,8 +16,11 @@ import javax.persistence.Table;
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	int cid;
-	String cname;
+	private int cid;
+	private String cname;
+
+	@OneToMany(targetEntity = Product.class, fetch = FetchType.EAGER, mappedBy = "category")
+	private Set<Product> pdt = new HashSet<Product>(0);
 
 	public int getCid() {
 		return cid;

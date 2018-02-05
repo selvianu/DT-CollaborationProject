@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page isELIgnored="false" %>
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -8,15 +10,24 @@
 </head>
 <body>
 	<h1>Add Product</h1>
-	<form action="addProduct" method="post" class="modal-content">
-		Product Name:<input type="text" name="pname"> </br>
-		</br>Product Price:<input type="text" name="price"></br>
-		</br> Enter no of products available:<input type="text" name="available">
-		</br>
-		</br>Enter the supplier Id:<input type="text" name="supplierId"> </br>
-		</br>Enter Category Id:<input type="text" name="cId"></br>
-		</br>
-		</br> <input type="submit" value="add Product">
+	<form action="addProduct" method="post" class="modal-content"
+		enctype="multipart/form-data">
+		Product Name:<input type="text" name="pname"> </br> </br> Produt
+		Description:<input type="text" name="desc"> </br> </br> Product Price:<input
+			type="text" name="price"></br> </br> Enter no of products available:<input
+			type="text" name="stockAvailable"> </br> </br> Select Product Category:
+		<select name="selectCategory">
+			<!-- <option value="CD">CD</option>
+			<option value="Flash Cards">Flash Cards</option>
+			<option value="Board Books">Board Books</option>
+			<option value="3D Books">Board Books</option> -->
+			<c:forEach var="cat" items="${category}" begin="1" end="5">
+				<option label="${cat.cname}" value="${cat.cid}" />
+				
+			</c:forEach>
+
+		</select> <input type="file" name="imgName"> <input type="submit"
+			value="enter">
 	</form>
 </body>
 </html>

@@ -28,6 +28,24 @@ public class User {
 	private String password2;
 	private String email;
 	private Date dob;
+	private String role;
+	private Boolean enabled;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public String getUsername() {
 		return username;

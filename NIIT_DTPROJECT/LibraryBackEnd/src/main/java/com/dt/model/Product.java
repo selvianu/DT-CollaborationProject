@@ -1,19 +1,39 @@
 package com.dt.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	int pid;
-	String pname;
-	int price, available, cId, supplierId;
+	private int pid;
+	private String pname;
+	private String desc;
+	private Float price;
+	private Integer stockAvailable;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cid")
+	private Category category;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "sid")
+	private Supplier supplier;
+
+	@Transient
+	MultipartFile pimage;
+	private String imgName;
 
 	public int getPid() {
 		return pid;
@@ -31,36 +51,60 @@ public class Product {
 		this.pname = pname;
 	}
 
-	public int getPrice() {
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
-	public int getAvailable() {
-		return available;
+	public Integer getStockAvailable() {
+		return stockAvailable;
 	}
 
-	public void setAvailable(int available) {
-		this.available = available;
+	public void setStockAvailable(Integer stockAvailable) {
+		this.stockAvailable = stockAvailable;
 	}
 
-	public int getcId() {
-		return cId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setcId(int cId) {
-		this.cId = cId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public int getSupplierId() {
-		return supplierId;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public MultipartFile getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(MultipartFile pimage) {
+		this.pimage = pimage;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
 
 }
