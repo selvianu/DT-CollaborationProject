@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,14 +70,24 @@ public class indexController {
 	}
 
 	@RequestMapping("/addcategory")
-	public String AddCategory() {
+	public String AddCategory(Model model, HttpServletRequest req) {
+		Category cat = new Category();
+		Product p = new Product();
+		cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
+		p.setCategory(cat);
+		model.addAttribute("category", categoryDao.retrieveCategory());
 		return "addcategory";
 	}
 
 	@RequestMapping("/addproduct")
 	public String AddProduct(Model model) {
-
 		return "addproduct";
+	}
+
+	@RequestMapping("/showProductDetails")
+	public String showProducts() {
+		System.out.println("show products");
+		return "/showProducts";
 	}
 
 	@RequestMapping("/register")
@@ -106,7 +117,6 @@ public class indexController {
 		s.setSupplierName(sname);
 		supplierDao.insertSupplier(s);
 		return mv;
-
 	}
 
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
@@ -121,7 +131,6 @@ public class indexController {
 		// Float pprice = Float.parseFloat("price");
 		p.setPrice(Float.parseFloat(req.getParameter("price")));
 		p.setStockAvailable(Integer.parseInt(req.getParameter("stockAvailable")));
-
 		Category cat = new Category();
 		cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
 		p.setCategory(cat);
@@ -145,6 +154,23 @@ public class indexController {
 			System.out.println(e.getStackTrace());
 		}
 		return "addproduct";
+	}
+
+/*	@RequestMapping(value = "/showProducts")
+	public String showProducts1(Model m) {
+		System.out.println("to show product - List");
+		List<Product> listProducts = productDao.retrieveProducts();
+		m.addAttribute("productList", listProducts);
+		return "index";
+	}*/
+	@RequestMapping(value="/showProducts")
+	public String listAllProducts(Model m)
+	{
+		System.out.println("product list");
+		List<Product> allProducts = productDao.getAllProducts();
+		m.addAttribute("pdtList", allProducts);
+		return "showProducts";
+		
 	}
 
 	@RequestMapping(value = "/registrationController", method = RequestMethod.POST)

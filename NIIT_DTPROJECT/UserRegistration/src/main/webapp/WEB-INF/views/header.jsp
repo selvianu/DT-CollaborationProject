@@ -34,6 +34,7 @@
 						Category</a>
 				<li><a href="#" data-target="#id04" data-toggle="modal">Add
 						Product</a>
+				<li><a href="showProductDetails">Show Products</a></li>
 			</ul>
 		</div>
 	</div>
