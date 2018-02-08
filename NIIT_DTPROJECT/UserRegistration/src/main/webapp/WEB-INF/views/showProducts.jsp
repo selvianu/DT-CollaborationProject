@@ -35,10 +35,7 @@
 
 			</tr>
 		</c:forEach>
-		<tr>
-			<td align="center"><a href=""><span
-					class="glyphicon glyphicon-info-sign">| |</span></a></td>
-		</tr>
+
 		<!-- 	<tr>
 			<td align="center"><a
 				href=<c:url value="/all/supplier/viewsupplier/${sup.sid}"/>><span

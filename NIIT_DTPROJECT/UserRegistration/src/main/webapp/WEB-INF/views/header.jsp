@@ -26,15 +26,24 @@
 		<div class="collapse navbar-collapse, topnav" id="myNav">
 			<ul class="nav navbar-nav">
 				<li><a href="home">Home</a></li>
-				<li><a href="#" data-target="#id01" data-toggle="modal">Register</a>
-				</li>
-				<li><a href="#" data-target="#id02" data-toggle="modal">Sign
-						In</a></li>
-				<li><a href="#" data-target="#id03" data-toggle="modal">Add
-						Category</a>
-				<li><a href="#" data-target="#id04" data-toggle="modal">Add
-						Product</a>
-				<li><a href="showProducts">Show Products</a></li>
+				<li><a href="contactus"><i class="fa fa-address-book"
+						aria-hidden="true"></i></a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/adding"
+					data-target="#id01" data-toggle="modal">Register</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" href="#">Admin</a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${pageContext.request.contextPath}/admin/showProducts"
+							data-target="#id02" data-toggle="modal">Product</a></li>
+
+						<!-- <li><a href="#" data-target="#id02" data-toggle="modal">Sign
+								In</a></li>
+						<li><a href="#" data-target="#id03" data-toggle="modal">Add
+								Category</a>
+						<li><a href="#" data-target="#id04" data-toggle="modal">Add
+								Product</a>
+						<li><a href="showProducts">Show Products</a></li> -->
+					</ul>
 			</ul>
 		</div>
 	</div>

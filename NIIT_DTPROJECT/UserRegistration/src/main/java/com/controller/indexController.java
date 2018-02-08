@@ -65,7 +65,7 @@ public class indexController {
 		return "index";
 	}
 
-	@RequestMapping("/signin")
+	@RequestMapping("/login")
 	public String Login() {
 		return "signin";
 	}
