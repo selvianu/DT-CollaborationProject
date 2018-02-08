@@ -22,6 +22,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -156,21 +157,32 @@ public class indexController {
 		return "addproduct";
 	}
 
-/*	@RequestMapping(value = "/showProducts")
-	public String showProducts1(Model m) {
-		System.out.println("to show product - List");
-		List<Product> listProducts = productDao.retrieveProducts();
-		m.addAttribute("productList", listProducts);
-		return "index";
-	}*/
-	@RequestMapping(value="/showProducts")
-	public String listAllProducts(Model m)
-	{
+	/*
+	 * @RequestMapping(value = "/showProducts") public String showProducts1(Model m)
+	 * { System.out.println("to show product - List"); List<Product> listProducts =
+	 * productDao.retrieveProducts(); m.addAttribute("productList", listProducts);
+	 * return "index"; }
+	 */
+	@RequestMapping(value = "/showProducts")
+	public String listAllProducts(Model m) {
 		System.out.println("product list");
-		List<Product> allProducts = productDao.getAllProducts();
-		m.addAttribute("pdtList", allProducts);
+		System.out.println("to show product - List");
+		List<Product> listProducts = productDao.getAllProducts();
+		m.addAttribute("productList", listProducts);
+		for (Product product : listProducts) {
+			System.out.println(product.getPname());
+			
+			
+		}
 		return "showProducts";
-		
+	}
+
+	@RequestMapping(value = "/showProducts", method = RequestMethod.POST)
+	public String addStudent(@ModelAttribute("SpringWeb") Product pdt, ModelMap model) {
+		model.addAttribute("name", pdt.getPname());
+		model.addAttribute("desc", pdt.getDesc());
+		// model.addAttribute("id", student.getId());
+		return "result";
 	}
 
 	@RequestMapping(value = "/registrationController", method = RequestMethod.POST)
