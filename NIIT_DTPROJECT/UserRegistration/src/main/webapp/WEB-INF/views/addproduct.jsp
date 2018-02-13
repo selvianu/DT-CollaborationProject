@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>Add Product</h1>
-	<springForm:form action="${contextRoot}/addProduct" method="POST"
+	<springForm:form action="${contextRoot}/admin/addProduct" method="POST"
 		class="form-horizontal" id="form2" enctype="multipart/form-data">
 			Product Name:<input type="text" name="pname">
 		</br>

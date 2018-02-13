@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -77,7 +78,7 @@ public class indexController {
 		cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
 		p.setCategory(cat);
 		model.addAttribute("category", categoryDao.retrieveCategory());
-		return "addcategory";
+		return "catList";
 	}
 
 	@RequestMapping("/addproduct")
@@ -96,19 +97,17 @@ public class indexController {
 		return "register";
 	}
 
-	@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
-	public ModelAndView saveCategoryData(@RequestParam("cname") String cname) {
-
-		ModelAndView mv = new ModelAndView();
-		Category c = new Category();
-		c.setCname(cname);
-		categoryDao.addCategory(c);
-		mv.addObject(c);
-		// categoryDaoImpl.addCategory(c);
-		System.out.println("category added");
-		return mv;
-
-	}
+	/*
+	 * @RequestMapping(value = "/addcategory", method = RequestMethod.POST) public
+	 * ModelAndView saveCategoryData(@RequestParam("cname") String cname) {
+	 * 
+	 * ModelAndView mv = new ModelAndView(); Category c = new Category();
+	 * c.setCname(cname); categoryDao.addCategory(c); mv.addObject(c); //
+	 * categoryDaoImpl.addCategory(c); System.out.println("category added"); return
+	 * mv;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/addSupplier", method = RequestMethod.POST)
 	public ModelAndView saveSupplierData(@RequestParam("sid") Integer sid, @RequestParam("sname") String sname) {
@@ -120,7 +119,7 @@ public class indexController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/addProduct", method = RequestMethod.POST)
 	public String addProduct(HttpServletRequest req, RedirectAttributes redirectAttributes,
 			@RequestParam("imgName") MultipartFile file, Model model) {
 		Product p = new Product();
@@ -133,8 +132,8 @@ public class indexController {
 		p.setPrice(Float.parseFloat(req.getParameter("price")));
 		p.setStockAvailable(Integer.parseInt(req.getParameter("stockAvailable")));
 		Category cat = new Category();
-		cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
-		p.setCategory(cat);
+		// cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
+		// p.setCategory(cat);
 
 		String filepath = req.getSession().getServletContext().getRealPath("/");
 		String filename = file.getOriginalFilename();
@@ -142,7 +141,7 @@ public class indexController {
 		productDao.addProduct(p);
 		if (file.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-			return "addproduct";
+			return "addProduct";
 		}
 		// productDaoImpl.addProduct(p);
 		try {
@@ -154,7 +153,8 @@ public class indexController {
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 		}
-		return "addproduct";
+		System.out.println("product - security added");
+		return "index";
 	}
 
 	/*
@@ -171,8 +171,7 @@ public class indexController {
 		m.addAttribute("productList", listProducts);
 		for (Product product : listProducts) {
 			System.out.println(product.getPname());
-			
-			
+
 		}
 		return "showProducts";
 	}
@@ -185,12 +184,12 @@ public class indexController {
 		return "result";
 	}
 
-	@RequestMapping(value = "/registrationController", method = RequestMethod.POST)
-	public ModelAndView register(@RequestParam("username") String username, @RequestParam("password1") String password1,
+	@RequestMapping(value = "/admin/registrationController", method = RequestMethod.POST)
+	public String register(@RequestParam("username") String username, @RequestParam("password1") String password1,
 			@RequestParam("password2") String password2, @RequestParam("email") String email,
-			@RequestParam("dob") Date dob, @ModelAttribute("user") User user, HttpServletResponse res)
+			@RequestParam("dob") Date dob, @ModelAttribute("user") User user, ModelMap model, HttpServletResponse res)
 			throws ClassNotFoundException, SQLException, IOException {
-		ModelAndView mv = new ModelAndView();
+
 		user.setUsername(username);
 		user.setPassword1(password1);
 		user.setPassword2(password2);
@@ -204,22 +203,30 @@ public class indexController {
 			res.sendRedirect("passwordincorect");
 		}
 		res.sendRedirect("register");
-		return mv;
+		return "index";
 	}
 
-	@RequestMapping(value = "/signInCtrl", method = RequestMethod.POST)
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
-			Model model) throws ClassNotFoundException, SQLException {
-		User user2 = userDao.getUser(username);
-		if ((user2.getUsername().equals(username)) && (user2.getPassword1().equals(password))) {
-			System.out.println(user2.getUsername() + "Uufser Page");
-			return "loginSuccess";
-		} else if (username.equals("admin") && (password.equals("admin"))) {
-			System.out.println("Admin Page");
-			return "loginSuccess";
-		} else {
-			return "loginFailure";
-		}
+	/*
+	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
+	 * login(@RequestParam("username") String username, @RequestParam("password")
+	 * String password, Model model) throws ClassNotFoundException, SQLException {
+	 * User user2 = userDao.getUser(username); if
+	 * ((user2.getUsername().equals(username)) &&
+	 * (user2.getPassword1().equals(password))) {
+	 * System.out.println(user2.getUsername() + "Uufser Page"); return
+	 * "loginSuccess"; } else if (username.equals("admin") &&
+	 * (password.equals("admin"))) { System.out.println("Admin Page"); return
+	 * "index"; } else { return "index"; }
+	 */
+
+	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
+	public String login(ModelMap model, Principal principal) {
+		String name = principal.getName();
+		System.out.println("spring security login");
+		model.addAttribute("username", name);
+
+		model.addAttribute("spring security");
+		return "success";
 
 	}
 }
