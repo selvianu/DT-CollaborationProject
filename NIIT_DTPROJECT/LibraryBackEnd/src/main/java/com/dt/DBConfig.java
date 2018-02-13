@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +21,10 @@ import com.dt.model.Category;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.dt")
-public class DBConfig {
 
+public class DBConfig {
+	@Autowired
+	@Bean(name = "dataSource")
 	// Creating a DataSource Bean
 	public DataSource getH2DataSource() {
 		DriverManagerDataSource driverMgrDataSource = new DriverManagerDataSource();

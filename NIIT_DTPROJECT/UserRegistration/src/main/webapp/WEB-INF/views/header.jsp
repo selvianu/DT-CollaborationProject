@@ -47,21 +47,19 @@
 					<li class="active"><a href="#"><span
 							class="glyphicon glyphicon-home aria-hidden=true"></span> Home</a></li>
 
-					<li><a href="${pageContext.request.contextPath}/admin/adding">Admin</a>
-					<li>
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#add"><span
-							class="glyphicon glyphicon-home aria-hidden=true"></span> Admin</a></li>
-					<ul class="dropdown-menu">
-						<li><a
-							href="${pageContext.request.contextPath}/admin/suppList">Supplier</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/admin/showProducts">Product</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/admin/catList">Category</a></li>
-						<li>
-					</ul>
-
+						data-toggle="dropdown"
+						href="${pageContext.request.contextPath}/admin/adding"><span
+							class="glyphicon glyphicon-home aria-hidden=true"></span> Admin</a>
+						<ul class="dropdown-menu">
+							<li><a
+								href="${pageContext.request.contextPath}/admin/suppList">Supplier</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/admin/showProducts">Product</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/admin/catList">Category</a></li>
+							<li>
+						</ul></li>
 
 
 					<c:url value="/admin/addproduct" var="url1"></c:url>
@@ -80,7 +78,12 @@
 
 							</security:authorize>
 						</c:if></li>
-
+					<li>
+						<button type="button" class="btn btn-info btn-lg"
+							data-toggle="modal" data-target="#id">
+							<span class="glyphicon glyphicon-user"></span> Add
+						</button>
+					</li>
 
 
 
@@ -92,130 +95,35 @@
 								<li><a
 									href="${pageContext.request.contextPath}/pdtCustList?cid=${productList.cid}">${productList}</a>
 							</c:forEach>
-						</ul>
-						<button type="button" class="btn btn-info btn-lg"
-							data-toggle="modal" data-target="#id">
-							<span class="glyphicon glyphicon-user"></span> Add
-						</button>
-						<div class="modal fade" id="id" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog cascading-modal" role="document">
-								<!--Content-->
-								<div class="modal-content">
+						</ul></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-item"><a class="nav-link active"
+						data-toggle="tab" href="#id1" role="tab"> <span
+							class="glyphicon glyphicon-user"></span> Login
+								${pageContext.request.userPrincipal}
+					</a><i class="fa fa-user mr-1"></i></li>
 
-									<!--Modal cascading tabs-->
-									<div class="modal-c-tabs">
-
-										<!-- Nav tabs -->
-										<ul class="nav nav-tabs tabs-3" role="tablist">
-											<li class="nav-item"><a class="nav-link active"
-												data-toggle="tab" href="#id01" role="tab"><i
-													class="fa fa-user mr-1"></i> supplier</a></li>
-											<li class="nav-item"><a class="nav-link"
-												data-toggle="tab" href="#id02" role="tab"><i
-													class="fa fa-user-plus mr-1"></i> category</a></li>
-											<li class="nav-item"><a class="nav-link"
-												data-toggle="tab" href="#id03" role="tab"><i
-													class="fa fa-user-plus mr-1"></i> product</a></li>
-										</ul>
-
-										<!-- Tab panels -->
-										<div class="tab-content">
-											<!--Panel 7-->
-											<div class="tab-pane fade in show active" id="#id01"
-												role="tabpanel">
-
-												<!--   Body -->
-												<div class="modal-body mb-1">
-
-													<%@ include file="addsupplier.jsp"%>
-													<div class="text-center mt-2">
-														<button class="btn btn-info" type="submit" form="form2"
-															value="saveproduct">Submit</button>
-														<button type="button"
-															class="btn btn-primary waves-effect ml-auto"
-															data-dismiss="modal">Close</button>
-													</div>
-												</div>
-
-
-											</div>
-											<!--/.Panel 7-->
-											<!--Panel 8-->
-											<div class="tab-pane fade" id="id02" role="tabpanel">
-
-												<!--Body-->
-												<div class="modal-body mb-1">
-
-													<%@include file="addcategory.jsp"%>
-													<div class="text-center mt-2">
-														<button class="btn btn-info" type="submit" form="form3"
-															value="saveproduct">Submit</button>
-
-														<button type="button"
-															class="btn btn-primary waves-effect ml-auto"
-															data-dismiss="modal">Close</button>
-													</div>
-												</div>
-
-											</div>
-											<div class="tab-pane fade" id="id03" role="tabpanel">
-												<div class="modal-body mb-1">
-													<%@include file="addproduct.jsp"%>
-													<div class="text-center mt-2">
-														<button class="btn btn-info" type="submit" form="form1"
-															value="saveproduct">Submit</button>
-														<button type="button"
-															class="btn btn-primary waves-effect ml-auto"
-															data-dismiss="modal">Close</button>
-													</div>
-
-												</div>
-
-											</div>
-
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#id1" role="tab"> <span
-									class="glyphicon glyphicon-user"></span> Login
-							</a><i class="fa fa-user mr-1"></i></li>
-
-						</ul>
-
-						<div class="tab-pane fade" id="id1" role="tabpanel">
-							<div class="modal-body mb-1">
-								<%@include file="login.jsp"%>
-								<div class="text-center mt-2">
-									<button class="btn btn-info" type="submit" form="form1"
-										value="saveproduct">Submit</button>
-									<button type="button"
-										class="btn btn-primary waves-effect ml-auto"
-										data-dismiss="modal">Close</button>
-								</div>
-							</div>
-						</div>
+				</ul>
 			</div>
-
-			<div class="tab-pane fade" id="id2" role="tabpanel">
-				<div class="modal-body mb-1">
-					<%@include file="login.jsp"%>
-					<div class="text-center mt-2">
-						<button class="btn btn-info" type="submit" form="form1">Submit</button>
-						<button type="button" class="btn btn-primary waves-effect ml-auto"
-							data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
 		</div>
 	</nav>
+
+
+
+	<div class="tab-pane fade" id="id1" role="tabpanel">
+		<div class="modal-body mb-1">
+
+			<%@include file="login.jsp"%>
+			<div class="text-center mt-2">
+				<button class="btn btn-info" type="submit" form="form1"
+					value="saveproduct">Submit</button>
+				<button type="button" class="btn btn-primary waves-effect ml-auto"
+					data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+	<jsp:include page="addmodal.jsp"></jsp:include>
 
 </body>
 </html>

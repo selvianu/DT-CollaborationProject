@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Registration Page</h1>
-	<form action="registrationController" method="post"
+	<form action="registrationController" method="GET"
 		class="modal-content">
 		Enter username:<input type="text" name="username"> </br> </br> </br>Enter
 		password:<input type="password" name="password1"> </br> </br> </br>Re-Enter

@@ -66,10 +66,9 @@ public class indexController {
 		return "index";
 	}
 
-	@RequestMapping("/login")
-	public String Login() {
-		return "signin";
-	}
+	/*
+	 * @RequestMapping("/login") public String Login() { return "signin"; }
+	 */
 
 	@RequestMapping("/addcategory")
 	public String AddCategory(Model model, HttpServletRequest req) {
@@ -92,10 +91,7 @@ public class indexController {
 		return "/showProducts";
 	}
 
-	@RequestMapping("/register")
-	public String register() {
-		return "register";
-	}
+	
 
 	/*
 	 * @RequestMapping(value = "/addcategory", method = RequestMethod.POST) public
@@ -184,49 +180,5 @@ public class indexController {
 		return "result";
 	}
 
-	@RequestMapping(value = "/admin/registrationController", method = RequestMethod.POST)
-	public String register(@RequestParam("username") String username, @RequestParam("password1") String password1,
-			@RequestParam("password2") String password2, @RequestParam("email") String email,
-			@RequestParam("dob") Date dob, @ModelAttribute("user") User user, ModelMap model, HttpServletResponse res)
-			throws ClassNotFoundException, SQLException, IOException {
-
-		user.setUsername(username);
-		user.setPassword1(password1);
-		user.setPassword2(password2);
-		user.setEmail(email);
-		user.setDob(dob);
-		user.setRole("role_user");
-		if (password1.equals(password2)) {
-			userDao.addUser(user);
-			System.out.println(username + " added");
-		} else {
-			res.sendRedirect("passwordincorect");
-		}
-		res.sendRedirect("register");
-		return "index";
-	}
-
-	/*
-	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
-	 * login(@RequestParam("username") String username, @RequestParam("password")
-	 * String password, Model model) throws ClassNotFoundException, SQLException {
-	 * User user2 = userDao.getUser(username); if
-	 * ((user2.getUsername().equals(username)) &&
-	 * (user2.getPassword1().equals(password))) {
-	 * System.out.println(user2.getUsername() + "Uufser Page"); return
-	 * "loginSuccess"; } else if (username.equals("admin") &&
-	 * (password.equals("admin"))) { System.out.println("Admin Page"); return
-	 * "index"; } else { return "index"; }
-	 */
-
-	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-	public String login(ModelMap model, Principal principal) {
-		String name = principal.getName();
-		System.out.println("spring security login");
-		model.addAttribute("username", name);
-
-		model.addAttribute("spring security");
-		return "success";
-
-	}
+	
 }

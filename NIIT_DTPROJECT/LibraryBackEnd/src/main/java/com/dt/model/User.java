@@ -87,4 +87,10 @@ public class User {
 		this.dob = dob;
 	}
 
+	@Override
+	public String toString() {
+		return "User [uid=" + uid + ", username=" + username + ", password1=" + password1 + ", password2=" + password2
+				+ ", email=" + email + ", dob=" + dob + ", role=" + role + ", enabled=" + enabled + "]";
+	}
+
 }
