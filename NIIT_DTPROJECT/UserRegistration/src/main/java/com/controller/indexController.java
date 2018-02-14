@@ -66,9 +66,6 @@ public class indexController {
 		return "index";
 	}
 
-	/*
-	 * @RequestMapping("/login") public String Login() { return "signin"; }
-	 */
 
 	@RequestMapping("/addcategory")
 	public String AddCategory(Model model, HttpServletRequest req) {
@@ -80,31 +77,6 @@ public class indexController {
 		return "catList";
 	}
 
-	@RequestMapping("/addproduct")
-	public String AddProduct(Model model) {
-		return "addproduct";
-	}
-
-	@RequestMapping("/showProductDetails")
-	public String showProducts() {
-		System.out.println("show products");
-		return "/showProducts";
-	}
-
-	
-
-	/*
-	 * @RequestMapping(value = "/addcategory", method = RequestMethod.POST) public
-	 * ModelAndView saveCategoryData(@RequestParam("cname") String cname) {
-	 * 
-	 * ModelAndView mv = new ModelAndView(); Category c = new Category();
-	 * c.setCname(cname); categoryDao.addCategory(c); mv.addObject(c); //
-	 * categoryDaoImpl.addCategory(c); System.out.println("category added"); return
-	 * mv;
-	 * 
-	 * }
-	 */
-
 	@RequestMapping(value = "/addSupplier", method = RequestMethod.POST)
 	public ModelAndView saveSupplierData(@RequestParam("sid") Integer sid, @RequestParam("sname") String sname) {
 		ModelAndView mv = new ModelAndView();
@@ -115,70 +87,4 @@ public class indexController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/admin/addProduct", method = RequestMethod.POST)
-	public String addProduct(HttpServletRequest req, RedirectAttributes redirectAttributes,
-			@RequestParam("imgName") MultipartFile file, Model model) {
-		Product p = new Product();
-		System.out.println("in controller");
-		model.addAttribute("category", categoryDao.retrieveCategory());
-		String UPLOADED_FOLDER = "C:\\Users\\selvi\\Pictures\\DT-images";
-		p.setPname(req.getParameter("pname"));
-		p.setDesc(req.getParameter("desc"));
-		// Float pprice = Float.parseFloat("price");
-		p.setPrice(Float.parseFloat(req.getParameter("price")));
-		p.setStockAvailable(Integer.parseInt(req.getParameter("stockAvailable")));
-		Category cat = new Category();
-		// cat.setCid(Integer.parseInt(req.getParameter("selectCategory")));
-		// p.setCategory(cat);
-
-		String filepath = req.getSession().getServletContext().getRealPath("/");
-		String filename = file.getOriginalFilename();
-		p.setImgName(filename);
-		productDao.addProduct(p);
-		if (file.isEmpty()) {
-			redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-			return "addProduct";
-		}
-		// productDaoImpl.addProduct(p);
-		try {
-			byte[] imagebytes = file.getBytes();
-			Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-			Files.write(path, imagebytes);
-			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded '" + file.getOriginalFilename() + "'");
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-		}
-		System.out.println("product - security added");
-		return "index";
-	}
-
-	/*
-	 * @RequestMapping(value = "/showProducts") public String showProducts1(Model m)
-	 * { System.out.println("to show product - List"); List<Product> listProducts =
-	 * productDao.retrieveProducts(); m.addAttribute("productList", listProducts);
-	 * return "index"; }
-	 */
-	@RequestMapping(value = "/showProducts")
-	public String listAllProducts(Model m) {
-		System.out.println("product list");
-		System.out.println("to show product - List");
-		List<Product> listProducts = productDao.getAllProducts();
-		m.addAttribute("productList", listProducts);
-		for (Product product : listProducts) {
-			System.out.println(product.getPname());
-
-		}
-		return "showProducts";
-	}
-
-	@RequestMapping(value = "/showProducts", method = RequestMethod.POST)
-	public String addStudent(@ModelAttribute("SpringWeb") Product pdt, ModelMap model) {
-		model.addAttribute("name", pdt.getPname());
-		model.addAttribute("desc", pdt.getDesc());
-		// model.addAttribute("id", student.getId());
-		return "result";
-	}
-
-	
 }

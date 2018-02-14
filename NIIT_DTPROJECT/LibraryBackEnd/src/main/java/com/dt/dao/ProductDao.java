@@ -2,6 +2,7 @@ package com.dt.dao;
 
 import java.util.List;
 
+import com.dt.model.Category;
 import com.dt.model.Product;
 
 public interface ProductDao {
@@ -17,4 +18,7 @@ public interface ProductDao {
 	public Product getProduct(int productId);
 
 	public List<Product> getAllProducts();
+
+	public List<Category> getProductBypid(int productId);
+
 }

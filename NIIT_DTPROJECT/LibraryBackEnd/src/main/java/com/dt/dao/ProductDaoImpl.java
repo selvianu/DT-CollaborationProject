@@ -8,6 +8,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.dt.model.Category;
 import com.dt.model.Product;
 
 @Transactional
@@ -54,4 +56,10 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> getAllProducts() {
 		return sessionFactory.getCurrentSession().createQuery("from Product", Product.class).list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Category> getProductBypid(int productId) {
+		return (List<Category>) sessionFactory.getCurrentSession().get(Product.class, productId);
+	}
+
 }
