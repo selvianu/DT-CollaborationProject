@@ -57,7 +57,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/admin/showProducts">Product</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/admin/catList">Category</a></li>
+								href="${pageContext.request.contextPath}/showCategory">Category</a></li>
 							<li>
 						</ul></li>
 
@@ -101,7 +101,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						data-toggle="tab" href="#id1" role="tab"> <span
 							class="glyphicon glyphicon-user"></span> Login
-								${pageContext.request.userPrincipal}
+							${pageContext.request.userPrincipal}
 					</a><i class="fa fa-user mr-1"></i></li>
 
 				</ul>

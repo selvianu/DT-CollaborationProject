@@ -16,7 +16,7 @@
 		</tr>
 
 
-		<c:forEach items="${productListById}" var="catproduct">
+		<c:forEach items="${categoryList}" var="catproduct">
 			<tr>
 				<td>${catproduct.cname}</td>
 			</tr>

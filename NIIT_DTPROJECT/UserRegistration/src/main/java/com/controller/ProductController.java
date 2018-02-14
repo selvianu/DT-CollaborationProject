@@ -87,7 +87,7 @@ public class ProductController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/admin/showProducts")
+	@RequestMapping(value = "/showProducts")
 	public String listAllProducts(Model m) {
 		System.out.println("product list");
 		System.out.println("to show product - List");
@@ -100,11 +100,22 @@ public class ProductController {
 		return "showProducts";
 	}
 
-	@RequestMapping(value = "/admin/showProducts")
+	@RequestMapping(value = "/showCategory")
+	public String listAllCategory(Model m) {
+		System.out.println("product list");
+		System.out.println("to show product - List");
+		List<Category> listCategory = categoryDao.getAllCategory();
+		m.addAttribute("categoryList", listCategory);
+		for (Category category : listCategory) {
+			System.out.println(category.getCname());
+		}
+		return "catList";
+	}
+
+	@RequestMapping(value = "/showCategoryByPid")
 	public String ProductsByPid(Model m, @RequestParam("pid") int pid) {
 		System.out.println("product list");
 		System.out.println("to show product - List");
-
 		List<Category> listCategoryByPid = productDao.getProductBypid(pid);
 		m.addAttribute("productListById", listCategoryByPid);
 		for (Category category : listCategoryByPid) {
