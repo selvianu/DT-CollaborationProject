@@ -112,6 +112,7 @@ public class ProductController {
 		System.out.println("to view specified product by id");
 		Product product = productDao.getProduct(pid);
 		model.addAttribute("product", product);
+		System.out.println(product);
 		return "viewProduct";
 	}
 

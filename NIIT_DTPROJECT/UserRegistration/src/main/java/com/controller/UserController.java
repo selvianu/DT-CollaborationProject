@@ -68,12 +68,23 @@ public class UserController {
 
 	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
 	public String login(ModelMap model, Principal principal) {
-		System.out.println("principal name" + principal.getName());
-		String name = principal.getName();
+		//System.out.println("principal name" + principal.getName());
+		// String name = principal.getName();
 		System.out.println("spring security login");
-		model.addAttribute("username", name);
+		// model.addAttribute("username", name);
+		model.addAttribute("username");
 		// model.addAttribute("spring security");
 		return "index";
 
+	}
+
+	@RequestMapping(value = "/login")
+	public String loginPage(@RequestParam(required = false) boolean Login, Model model) {
+		if (Login == false) {
+			model.addAttribute("error", "login failed");
+		} else {
+			model.addAttribute("error", null);
+		}
+		return "login";
 	}
 }
