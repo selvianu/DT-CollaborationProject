@@ -27,9 +27,17 @@
 		</br> Enter no of products available:<input type="text"
 			name="stockAvailable">
 		</br>
-		</br> Select Product
-			Category: <input type="file" name="imgName">
-		<input type="submit" value="enter">
+		</br>
+		<input type="file" name="imgName">
+		<!-- 		<input type="submit" value="enter">
+			 -->
+		</br> Select Category
+			<select name="cat">
+			<c:forEach var="cat" items="${category}" begin="1" end="5">
+				<option label="${cat.cname}" />
+			</c:forEach>
+		</select>
+		<!-- <input type="submit">-->
 		<br>
 		<br>
 	</springForm:form>

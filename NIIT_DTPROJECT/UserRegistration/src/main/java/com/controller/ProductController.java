@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,11 +38,10 @@ public class ProductController {
 	@Autowired
 	private SupplierDao supplierDao;
 
-	@RequestMapping("/addproduct")
-	public String AddProduct(Model model) {
-		System.out.println("Product Controller");
-		return "addproduct";
-	}
+	/*
+	 * @RequestMapping("/addproduct") public String AddProduct(Model model) {
+	 * System.out.println("Product Controller"); return "addproduct"; }
+	 */
 
 	@RequestMapping("/showProductDetails")
 	public String showProducts() {
@@ -81,6 +81,7 @@ public class ProductController {
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded '" + file.getOriginalFilename() + "'");
 		} catch (Exception e) {
+
 			System.out.println(e.getStackTrace());
 		}
 		System.out.println("product - security added");
@@ -89,15 +90,29 @@ public class ProductController {
 
 	@RequestMapping(value = "/showProducts")
 	public String listAllProducts(Model m) {
-		System.out.println("product list");
 		System.out.println("to show product - List");
 		List<Product> listProducts = productDao.getAllProducts();
 		m.addAttribute("productList", listProducts);
-		for (Product product : listProducts) {
-			System.out.println(product.getPname());
-
-		}
+		/*
+		 * for (Product product : listProducts) {
+		 * System.out.println(product.getPname()); }
+		 */
 		return "showProducts";
+	}
+
+	/*
+	 * @RequestMapping("/admin/deleteProduct") public String
+	 * DeleteProduct(@RequestParam("pid") int pid) {
+	 * System.out.println("to delect specified product by id"); Product product =
+	 * new Product(); // productDao.deleteProduct(pid);
+	 * System.out.println("pdt deleted"); return "deleteProduct"; }
+	 */
+
+	@RequestMapping(value = "/admin/deleteProduct/{pid}")
+	public String deleteProduct(@PathVariable int pid) {
+		System.out.println("to delect specified product by id");
+		productDao.deleteProduct(pid);
+		return "redirect:/showProducts";
 	}
 
 	@RequestMapping(value = "/showCategory")
@@ -124,12 +139,12 @@ public class ProductController {
 		return "catList";
 	}
 
-	@RequestMapping(value = "/showProducts", method = RequestMethod.POST)
-	public String showPdt(@ModelAttribute("SpringWeb") Product pdt, ModelMap model) {
-		model.addAttribute("name", pdt.getPname());
-		model.addAttribute("desc", pdt.getDesc());
-		// model.addAttribute("id", student.getId());
-		return "result";
-	}
+	/*
+	 * @RequestMapping(value = "/showProducts", method = RequestMethod.POST) public
+	 * String showPdt(@ModelAttribute("SpringWeb") Product pdt, ModelMap model) {
+	 * model.addAttribute("name", pdt.getPname()); model.addAttribute("desc",
+	 * pdt.getDesc()); // model.addAttribute("id", student.getId()); return
+	 * "result"; }
+	 */
 
 }

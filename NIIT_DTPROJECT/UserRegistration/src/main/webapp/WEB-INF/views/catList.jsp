@@ -12,12 +12,14 @@
 <body>
 	<table border="1" cellspacing="2" align="center">
 		<tr bgcolor="gray">
+			<td>Category id</td>
 			<td>Category Name</td>
 		</tr>
 
 
 		<c:forEach items="${categoryList}" var="catproduct">
 			<tr>
+				<td>${catproduct.cid}</td>
 				<td>${catproduct.cname}</td>
 			</tr>
 		</c:forEach>

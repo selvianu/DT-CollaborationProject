@@ -13,39 +13,43 @@
 	<h2 style="text-align: center">Product List</h2>
 	<table border="1" cellspacing="2" align="center">
 		<tr bgcolor="gray">
+			<td>Product Id</td>
 			<td>Product Name</td>
 			<td>Description</td>
 			<td>Price</td>
 			<td>Stock</td>
 			<td>Photo</td>
+			<td>Actions</td>
 		</tr>
-
-
 		<c:forEach items="${productList}" var="product">
 			<tr>
+				<td>${product.pid}</td>
 				<td>${product.pname}</td>
 				<td>${product.desc}</td>
 				<td>${product.price}</td>
 				<td>${product.stockAvailable}</td>
-				<td><a href="productDesc/${product.pid}"> <img
-						src="<c:url value="/resources/**${product.pid}.jpg"/>"
-						width="50px" height="50px" /></a></td>
-				<td align="center"><a href=""><span
-						class="glyphicon glyphicon-info-sign">| |</span></a></td>
+				<c:url value="/resources/images/${product.pname}.jpg" var="imageUrl"></c:url>
+				<td><img src="${imageUrl}" height="50" width="100"></td>
 
+
+				<!-- <td><a href="productDesc/${product.pid}"> image<img
+						src="<c:url value="/resources/**${product.pid}.jpg"/>"
+						width="50px" height="50px" /></a></td>-->
+				<!-- 				<td align="center"><a href=""><span
+						class="glyphicon glyphicon-info-sign">update</span></a> <align="center">
+					<a href=""><span class="glyphicon glyphicon-info-sign">delete</span></a></td>-->
+
+				<td align="center" height="50" width="70"><a
+					href=<c:url value="/all/product/viewProduct/${product.pid}"/>><span
+						class="glyphicon glyphicon-info-sign">|View|</span></a></br> <a
+					href=<c:url value="/all/product/editform/${product.pid}"/>><span
+						class="glyphicon glyphicon-pencil">| Update|</span></a></br> <a
+					href=<c:url value="/admin/deleteProduct/${product.pid}"/>
+					class="btn btn-danger">Delete<span
+						class="glyphicon glyphicon-trash"></span></a></br></td>
 			</tr>
 		</c:forEach>
 
-		<!-- 	<tr>
-			<td align="center"><a
-				href=<c:url value="/all/supplier/viewsupplier/${sup.sid}"/>><span
-					class="glyphicon glyphicon-info-sign">| |</span></a> <a
-				href=<c:url value="/all/supplier/editform/${sup.sid}"/>><span
-					class="glyphicon glyphicon-pencil">| |</span></a> <a
-				href=<c:url value="/all/deletesupplier/${sup.sid}"/>><span
-					class="glyphicon glyphicon-trash"></span></a>
-		</tr>
-	 -->
 	</table>
 
 </body>

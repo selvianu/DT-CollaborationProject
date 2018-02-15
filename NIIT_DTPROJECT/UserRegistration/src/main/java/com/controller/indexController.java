@@ -51,18 +51,33 @@ import com.dt.model.User;
  */
 @Controller
 public class indexController {
-	
+
 	@Autowired
 	private CategoryDao categoryDao;
-	
+
 	@Autowired
 	private ProductDao productDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private SupplierDao supplierDao;
+
+	@RequestMapping("/goToLogin")
+	public String goToLoginPage() {
+		return "login";
+	}
+
+	@RequestMapping("/userLogged")
+	public String userLogged() {
+		return "redirect:/index";
+	}
+
+	@RequestMapping("/error")
+	public String userLogged1() {
+		return "error";
+	}
 
 	@RequestMapping(value = { "/", "/home" })
 	public String showMessage(Model model) {
@@ -70,7 +85,6 @@ public class indexController {
 		model.addAttribute("category", categoryDao.retrieveCategory());
 		return "index";
 	}
-
 
 	@RequestMapping("/addcategory")
 	public String AddCategory(Model model, HttpServletRequest req) {

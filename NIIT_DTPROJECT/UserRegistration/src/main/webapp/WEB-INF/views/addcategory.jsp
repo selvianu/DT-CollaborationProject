@@ -10,13 +10,13 @@
 </head>
 <body>
 	<h1>Add Category</h1>
-	<form action="addcategory" method="post" class="modal-content">
+	<form action="/admin/addcategory" method="post" class="modal-content">
 		Category Name:<input type="text" name="cname"> </br> </br> <input
 			type="submit" value="Add Category"> <select
 			name="selectCategory">
-			<c:forEach var="cat" items="${category}" begin="1" end="5">
+			<!-- <c:forEach var="cat" items="${category}" begin="1" end="5">
 				<option label="${cat.cname}" value="${cat.cid}" />
-			</c:forEach>
+			</c:forEach> -->
 		</select>
 
 	</form>

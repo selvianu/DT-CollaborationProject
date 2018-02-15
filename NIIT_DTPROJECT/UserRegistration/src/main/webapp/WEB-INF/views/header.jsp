@@ -55,7 +55,7 @@
 							<li><a
 								href="${pageContext.request.contextPath}/admin/suppList">Supplier</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/admin/showProducts">Product</a></li>
+								href="${pageContext.request.contextPath}/showProducts">Product</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/showCategory">Category</a></li>
 							<li>
