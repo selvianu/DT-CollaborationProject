@@ -100,19 +100,19 @@ public class ProductController {
 		return "showProducts";
 	}
 
-	/*
-	 * @RequestMapping("/admin/deleteProduct") public String
-	 * DeleteProduct(@RequestParam("pid") int pid) {
-	 * System.out.println("to delect specified product by id"); Product product =
-	 * new Product(); // productDao.deleteProduct(pid);
-	 * System.out.println("pdt deleted"); return "deleteProduct"; }
-	 */
-
 	@RequestMapping(value = "/admin/deleteProduct/{pid}")
 	public String deleteProduct(@PathVariable int pid) {
 		System.out.println("to delect specified product by id");
 		productDao.deleteProduct(pid);
 		return "redirect:/showProducts";
+	}
+
+	@RequestMapping(value = { "/all/product/viewProduct/{pid}" })
+	public String viewProduct(@PathVariable int pid, Model model) {
+		System.out.println("to view specified product by id");
+		Product product = productDao.getProduct(pid);
+		model.addAttribute("product", product);
+		return "viewProduct";
 	}
 
 	@RequestMapping(value = "/showCategory")
@@ -137,6 +137,15 @@ public class ProductController {
 			System.out.println(category.getCname());
 		}
 		return "catList";
+	}
+
+	@RequestMapping(value = { "/all/product/updateProduct/{pid}" })
+	public String editForm(@PathVariable int pid, Model model) {
+		model.addAttribute("cat", categoryDao.getAllCategory());
+		// model.addAttribute("supp", supplierDao.getAllSuppliers());
+		Product product = productDao.getProduct(pid);
+		model.addAttribute("products", product);
+		return "updateProduct";
 	}
 
 	/*

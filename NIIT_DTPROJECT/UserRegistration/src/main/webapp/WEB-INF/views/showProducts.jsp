@@ -42,7 +42,7 @@
 				<td align="center" height="50" width="70"><a
 					href=<c:url value="/all/product/viewProduct/${product.pid}"/>><span
 						class="glyphicon glyphicon-info-sign">|View|</span></a></br> <a
-					href=<c:url value="/all/product/editform/${product.pid}"/>><span
+					href=<c:url value="/all/product/updateProduct/${product.pid}"/>><span
 						class="glyphicon glyphicon-pencil">| Update|</span></a></br> <a
 					href=<c:url value="/admin/deleteProduct/${product.pid}"/>
 					class="btn btn-danger">Delete<span
