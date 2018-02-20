@@ -11,10 +11,10 @@ http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc  
 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.controller"/>
-	<context:component-scan base-package="com.dt"/>
-	<context:annotation-config/>
-    
+	<context:component-scan base-package="com.controller" />
+	<context:component-scan base-package="com.dt" />
+	<context:annotation-config />
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<mvc:annotation-driven /><!-- connect @ controller -->
