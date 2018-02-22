@@ -1,110 +1,84 @@
 package com.dt.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
+@Component
 @Entity
-@Table
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pid;
 	private String pname;
-	private String desc;
+	private String brandname;
 	private Float price;
-	private Integer stockAvailable;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cid")
+	private int stock;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Category category;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "sid")
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Supplier supplier;
-
 	@Transient
-	MultipartFile pimage;
-	private String imgName;
-
-	public int getPid() {
-		return pid;
-	}
-
-	public void setPid(int pid) {
-		this.pid = pid;
-	}
-
-	public String getPname() {
-		return pname;
-	}
-
-	public void setPname(String pname) {
-		this.pname = pname;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public Float getPrice() {
-		return price;
-	}
-
-	public void setPrice(Float price) {
-		this.price = price;
-	}
-
-	public Integer getStockAvailable() {
-		return stockAvailable;
-	}
-
-	public void setStockAvailable(Integer stockAvailable) {
-		this.stockAvailable = stockAvailable;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
+	private MultipartFile image;
+	
+	
 	public Supplier getSupplier() {
 		return supplier;
 	}
-
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-
-	public MultipartFile getPimage() {
-		return pimage;
+	public MultipartFile getImage() {
+		return image;
 	}
-
-	public void setPimage(MultipartFile pimage) {
-		this.pimage = pimage;
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
-
-	public String getImgName() {
-		return imgName;
+	
+	public Category getCategory() {
+		return category;
 	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	public int getPid() {
+		return pid;
+	}
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
+	public Float getPrice() {
+		return price;
+	}
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+	
 
 }

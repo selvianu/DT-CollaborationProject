@@ -1,18 +1,13 @@
 package com.dt.dao;
 
-import java.util.List;
-
 import com.dt.model.User;
 
 public interface UserDao {
-	public boolean addUser(User user);
 
-	public List<User> retrieveUser();
+	public boolean insertValues(User user);
 
-	public boolean deleteUser(User user);
+	public User getUserByUserId(int userId);
 
-	public User getUser(String username);
-
-	public boolean updateUser(User user);
+	public User getUserByUsername(String username);
 
 }

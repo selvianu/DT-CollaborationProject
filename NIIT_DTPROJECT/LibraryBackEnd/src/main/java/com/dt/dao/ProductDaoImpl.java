@@ -2,64 +2,54 @@ package com.dt.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dt.model.Category;
 import com.dt.model.Product;
 
-@Transactional
 @Repository("productDao")
+@Transactional
 public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
 
-	@Transactional
-	public boolean addProduct(Product product) {
-		sessionFactory.getCurrentSession().save(product);
-		return true;
-	}
-
-	@Transactional
-	public boolean deleteProduct(Product product) {
-		sessionFactory.getCurrentSession().delete(product);
-		return true;
-	}
-
-	public List<Product> retrieveProducts() {
-		Session session = sessionFactory.openSession();
-		Query q2 = session.createQuery("from Product");
-		List<Product> plist = q2.list();
-		session.close();
-		return plist;
-	}
-
-	public boolean updateProduct(Product product) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		currentSession.saveOrUpdate(product);
-		System.out.println("product upated");
-		return true;
-	}
-
-	public Product getProduct(int productId) {
-		Session currentSession = sessionFactory.getCurrentSession();
-		Product product = currentSession.get(Product.class, productId);
-		// currentSession.close();
+	public Product insertProduct(Product product) {
+		sessionFactory.getCurrentSession().saveOrUpdate(product);
 		return product;
 	}
 
 	public List<Product> getAllProducts() {
 		return sessionFactory.getCurrentSession().createQuery("from Product", Product.class).list();
+
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Category> getProductBypid(int productId) {
-		return (List<Category>) sessionFactory.getCurrentSession().get(Product.class, productId);
+	public Boolean deleteProduct(int pid) {
+		sessionFactory.getCurrentSession().delete(getProductById(pid));
+		return true;
+
+	}
+
+	public Product getProductById(int pid) {
+		return (Product) sessionFactory.getCurrentSession().get(Product.class, pid);
+	}
+
+	public Product getProductByCatId(int cid) {
+		return (Product) sessionFactory.getCurrentSession().get(Product.class, cid);
+
+	}
+
+	public Boolean updateProduct(Product product) {
+		try {
+			sessionFactory.getCurrentSession().update(product);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return true;
+
 	}
 
 }

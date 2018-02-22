@@ -1,41 +1,45 @@
 package com.dt.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
-@Table
 public class Supplier {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int sid;
-	private String supplierName;
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
+private int sid;
+private String sname;
+@OneToMany(cascade = CascadeType.ALL, mappedBy="supplier",targetEntity = Product.class)
+private List<Product> product;
 
-	@OneToMany(targetEntity = Product.class, fetch = FetchType.EAGER, mappedBy = "supplier")
-	private Set<Product> pdt = new HashSet<Product>(0);
+public List<Product> getProduct() {
+	return product;
+}
+public void setProduct(List<Product> product) {
+	this.product = product;
+}
+public int getSid() {
+	return sid;
+}
+public void setSid(int sid) {
+	this.sid = sid;
+}
+public String getSname() {
+	return sname;
+}
+public void setSname(String sname) {
+	this.sname = sname;
+}
 
-	public int getSid() {
-		return sid;
-	}
 
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
-
-	public String getSupplierName() {
-		return supplierName;
-	}
-
-	public void setSupplierName(String supplierName) {
-		this.supplierName = supplierName;
-	}
 
 }

@@ -5,14 +5,14 @@ import java.util.List;
 import com.dt.model.Category;
 
 public interface CategoryDao {
-	public boolean addCategory(Category category);
+	public void insertCategory(Category category);
 
-	public List<Category> retrieveCategory();
+	public List<Category> getAllCategories();
 
-	public boolean deleteCategory(Category category);
+	public void deleteCategory(int cid);
 
-	public Category getCategory(int catId);
+	public Category getCategoryById(int cid);
 
-	public boolean updateCategory(Category category);
+	public void updateCategory(Category category);
 
 }
