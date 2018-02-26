@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dt.dao.CategoryDao;
 import com.dt.dao.ProductDao;
 import com.dt.dao.SupplierDao;
+import com.dt.model.Category;
 import com.dt.model.Product;
+import com.dt.model.Supplier;
 
 @Controller
 public class ProductController {
@@ -31,18 +33,45 @@ public class ProductController {
 	SupplierDao supplierDao;
 	@Autowired
 	HttpServletRequest request;
+	
+	@ModelAttribute("supp")
+	public Supplier getSupplierBean() {
+		return new Supplier();
+	}
 
+	@ModelAttribute("pro")
+	public Product getProductBean() {
+		return new Product();
+	}
+	
+	@ModelAttribute("cat")
+	public Category getCategoryBean() {
+		return new Category();
+	}
+	
 	@RequestMapping(value = { "/saveproduct" })
 	public String saveProduct(@ModelAttribute("pro") Product product) {
 		productDao.insertProduct(product);
 		MultipartFile image = product.getImage();
-		String imagepath = request.getServletContext().getRealPath("/resource/images");
+		String imagepath = request.getServletContext().getRealPath("/resources/images");
 		System.out.println("---------Directory:-------" + imagepath);
 		Path path = Paths.get(imagepath + File.separator + product.getPid() + ".jpg");
 		System.out.println("-------Path:-----" + path.toString());
 
+		File file = new File(path.toString());
+
+		if (!file.exists()) {
+
+			if (file.mkdirs()) {
+				System.out.println("------------- Dir created ---------------");
+			} else {
+				System.out.println("------------- Dir not created --------------");
+			}
+
+		}
+
 		try {
-			image.transferTo(new File(path.toString()));
+			image.transferTo(file);
 		} catch (IllegalStateException e) {
 
 			e.printStackTrace();
@@ -54,8 +83,12 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = { "/productlist" })
-	public String showAllProduct(Model model) {
+	public String showAllProduct(Model model, HttpServletRequest request) {
+
 		List<Product> product = productDao.getAllProducts();
+		for (Product pro : product) {
+			System.out.println("Product---- : " + pro.getPname());
+		}
 		model.addAttribute("product", product);
 		return "productlist";
 	}
